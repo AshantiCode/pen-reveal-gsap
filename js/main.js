@@ -11,11 +11,19 @@ function init() {
       start: "top bottom-=270",
       end: `+=${getTopPartsHeight()}`,
       pin: true,
-      markers: true,
+      pinSpacing: false,
     },
   });
-}
+
+  gsap.set(".part4", { y: -548 });
+  gsap.set(".part5", { y: -722 });
+  gsap.set(".part6", { y: -843 });
+} // end init
 
 window.addEventListener("load", function () {
   init();
 });
+
+//part 6 = -843px
+//part 5 = - 722
+//part 4 = -548
