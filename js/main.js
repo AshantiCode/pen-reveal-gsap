@@ -1,13 +1,15 @@
+function getTopPartsHeight() {
+  return document.querySelector(".pen-top").clientHeight - 22;
+}
+
 function init() {
   gsap.set(".part3", {
-    y: () => {
-      return -(document.querySelector(".pen-top").clientHeight - 22);
-    },
+    y: -getTopPartsHeight(),
     scrollTrigger: {
       id: "pen-body",
       trigger: ".part3",
       start: "top bottom-=270",
-      end: `+=${document.querySelector(".pen-top").clientHeight - 22}`,
+      end: `+=${getTopPartsHeight()}`,
       pin: true,
       markers: true,
     },
