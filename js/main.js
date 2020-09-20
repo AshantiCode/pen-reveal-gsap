@@ -19,41 +19,26 @@ function init() {
   gsap.set(".part5", { y: -722 });
   gsap.set(".part6", { y: -843 });
 
-  // Tween the tip of the pen back to 0
-  gsap.to(".part6", {
-    y: 0,
-    ease: "none",
-    scrollTrigger: {
-      trigger: ".pen-body",
-      start: "top bottom-=640",
-      end: "+=843", // same as we offsetted it line 20
-      scrub: true, // while we scroll it animates
-      markers: true,
-    },
-  });
+  const partsBottomOffsets = [548, 722, 843];
 
-  gsap.to(".part5", {
-    y: 0,
-    ease: "none",
-    scrollTrigger: {
-      trigger: ".pen-body",
-      start: "top bottom-=640",
-      end: "+=722 ", // same as we offsetted it line 20
-      scrub: true, // while we scroll it animates
-      markers: true,
-    },
-  });
+  function fixBottomParts(el, offset, index) {
+    gsap.set(el, { y: -offset });
 
-  gsap.to(".part4", {
-    y: 0,
-    ease: "none",
-    scrollTrigger: {
-      trigger: ".pen-body",
-      start: "top bottom-=640",
-      end: "+=548", // same as we offsetted it line 20
-      scrub: true, // while we scroll it animates
-      markers: true,
-    },
+    gsap.to(el, {
+      y: 0,
+      ease: "none",
+      scrollTrigger: {
+        trigger: ".pen-body",
+        start: "top bottom-=640",
+        end: `+=${offset}`,
+        scrub: true,
+        markers: true,
+      },
+    });
+  }
+
+  gsap.utils.toArray([".part4", ".part5", ".part6"]).forEach((part, index) => {
+    fixBottomParts(part, partsBottomOffsets[index], index);
   });
 } // end init
 
