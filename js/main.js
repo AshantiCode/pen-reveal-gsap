@@ -46,7 +46,7 @@ function init() {
 
   allParts.forEach((part, index) => {
     let startPosition = "top center";
-
+    //index 2 war vorher an falscher position
     if (index === 2) {
       startPosition = `top+=${getTopPartsHeight()} center`;
     }
