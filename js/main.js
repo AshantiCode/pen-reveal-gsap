@@ -32,7 +32,6 @@ function init() {
         start: "top bottom-=640",
         end: `+=${offset}`,
         scrub: true,
-        markers: true,
       },
     });
   }
@@ -40,6 +39,28 @@ function init() {
   gsap.utils.toArray([".part4", ".part5", ".part6"]).forEach((part, index) => {
     fixBottomParts(part, partsBottomOffsets[index], index);
   });
+
+  //Loop through allt the parts
+  //   const allParts = document.querySelectorAll(".part"); <-- DAS Funktioniert nicht!
+  const allParts = gsap.utils.toArray(".part");
+
+  allParts.forEach((part, index) => {
+    let startPosition = "top center";
+
+    if (index === 2) {
+      startPosition = `top+=${getTopPartsHeight()} center`;
+    }
+
+    gsap.set(part, {
+      scrollTrigger: {
+        id: `${part.getAttribute("class")}`,
+        trigger: part,
+        toggleClass: "fade-in",
+        start: `${startPosition}`,
+      },
+    });
+  });
+  // toggle class when top of the part hits center of viewport
 } // end init
 
 window.addEventListener("load", function () {
